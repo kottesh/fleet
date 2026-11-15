@@ -11,6 +11,10 @@
     ../../modules/zsh.nix
     ../../modules/git.nix
     ../../modules/ssh.nix
+
+    ./services/caddy.nix
+    ./services/actual.nix
+    ./services/glance.nix
   ];
 
   networking.hostName = "noteq";
@@ -50,7 +54,7 @@
 
   users.users.kottesh = {
     isNormalUser = true;
-    description = "Kottesh";
+    description = "kottesh";
     shell = pkgs.zsh;
     extraGroups = [ "wheel" ];
     openssh.authorizedKeys.keys = [
@@ -89,7 +93,11 @@
 
   networking.firewall = {
     enable = true;
-    allowedTCPPorts = [ 22 ];
+    allowedTCPPorts = [
+      22
+      80
+      443
+    ];
   };
 
   environment.systemPackages = with pkgs; [
@@ -105,6 +113,7 @@
     lsof
     nixfmt
     bat
+    ripgrep
   ];
 
   system.stateVersion = "22.05";
