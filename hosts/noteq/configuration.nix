@@ -10,6 +10,7 @@
     ./hardware-configuration.nix
     ../../modules/zsh.nix
     ../../modules/git.nix
+    ../../modules/ssh.nix
   ];
 
   networking.hostName = "noteq";
@@ -103,6 +104,7 @@
     dig
     lsof
     nixfmt
+    bat
   ];
 
   system.stateVersion = "22.05";

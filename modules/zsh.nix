@@ -13,8 +13,6 @@
     shellAliases = {
       cat = "bat";
       grep = "rg";
-      hms = "home-manager switch --flake ~/.config/home-manager";
-      hmu = "nix flake update --flake ~/.config/home-manager && home-manager switch --flake ~/.config/home-manager";
       v = "nvim";
     };
 
