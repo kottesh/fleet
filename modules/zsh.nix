@@ -17,10 +17,16 @@
     };
 
     interactiveShellInit = ''
-            # History options mapped for system Zsh
+            # Keep history shared across concurrent shells.
+            mkdir -p "''${HISTFILE:h}"
+            touch "$HISTFILE"
+
             setopt HIST_IGNORE_DUPS
             setopt HIST_IGNORE_SPACE
+            setopt APPEND_HISTORY
+            setopt INC_APPEND_HISTORY
             setopt SHARE_HISTORY
+            setopt HIST_FCNTL_LOCK
 
             autoload -Uz vcs_info
             zstyle ':vcs_info:*' enable git
@@ -33,29 +39,13 @@
 
             precmd() {
               vcs_info
-              local left_str="%~"
-              [[ -n "$IN_NIX_SHELL" ]] && left_str+="%F{cyan} [nix]%f"
-
-              local right_str="''${vcs_info_msg_0_}"
-              
-              local exp_left
-              exp_left="$(print -P "$left_str")"
-              local exp_right
-              exp_right="$(print -P "$right_str")"
-
-              local pad_len=$(( COLUMNS - ''${#exp_left} - ''${#exp_right} ))
-              local pad=""
-              if (( pad_len > 0 )); then
-                pad="''${(l:$pad_len:: :)}"
-              fi
-
-              local git_part=""
-              [[ -n "$right_str" ]] && git_part="%F{yellow}($right_str)%f"
 
               PROMPT="%F{blue}%~%f"
               [[ -n "$IN_NIX_SHELL" ]] && PROMPT+="%F{cyan} [nix]%f"
-              PROMPT+="$pad$git_part
+              PROMPT+="
       %(?.%F{green}⨳%f.%F{red}⨳%f) "
+
+              RPROMPT="%F{yellow}''${vcs_info_msg_0_:+(''${vcs_info_msg_0_})}%f"
             }
 
             zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
@@ -65,6 +55,14 @@
             bindkey "^[[1;5D" backward-word
 
             bindkey -v
+
+            export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border --info=inline'
+            export FZF_CTRL_R_OPTS='--preview-window=hidden'
+
+            source ${pkgs.fzf}/share/fzf/key-bindings.zsh
+            source ${pkgs.fzf}/share/fzf/completion.zsh
+
+            bindkey '^R' fzf-history-widget
     '';
   };
 }

@@ -15,6 +15,7 @@
     ./services/caddy.nix
     ./services/actual.nix
     ./services/glance.nix
+    ./services/authelia.nix
   ];
 
   networking.hostName = "noteq";
@@ -114,6 +115,7 @@
     nixfmt
     bat
     ripgrep
+    fzf
   ];
 
   system.stateVersion = "22.05";
