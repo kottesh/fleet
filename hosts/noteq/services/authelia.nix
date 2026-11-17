@@ -97,6 +97,11 @@ in
             policy = "two_factor";
             subject = [ "group:admins" ];
           }
+          {
+            domain = "vault.kotsh.in";
+            policy = "two_factor";
+            subject = [ "group:admins" ];
+          }
         ];
       };
 

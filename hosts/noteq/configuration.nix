@@ -16,6 +16,7 @@
     ./services/actual.nix
     ./services/glance.nix
     ./services/authelia.nix
+    ./services/fail2ban.nix
   ];
 
   networking.hostName = "noteq";
@@ -63,7 +64,7 @@
     ];
   };
 
-  security.sudo.wheelNeedsPassword = false;
+  security.sudo.wheelNeedsPassword = true;
 
   zramSwap = {
     enable = true;
@@ -116,6 +117,7 @@
     bat
     ripgrep
     fzf
+    tree
   ];
 
   system.stateVersion = "22.05";
