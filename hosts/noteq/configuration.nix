@@ -14,7 +14,7 @@
 
     ./services/caddy.nix
     ./services/actual.nix
-    ./services/glance.nix
+    ./services/glance/glance.nix
     ./services/authelia.nix
     ./services/fail2ban.nix
   ];

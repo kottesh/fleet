@@ -1,0 +1,15 @@
+@font-face {
+  font-family: "InputMono";
+  src: url("https://db.onlinewebfonts.com/t/203eabac5dc6b58ce623b91fc47f34cc.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root,
+body {
+  font-family: "InputMono", ui-monospace, "SFMono-Regular", Menlo, Monaco, Consolas,
+    "Liberation Mono", "DejaVu Sans Mono", "Apple Color Emoji", "Segoe UI Emoji",
+    monospace;
+  font-style: normal;
+}
